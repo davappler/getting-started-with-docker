@@ -33,3 +33,4 @@
 
 ## Conclusion
 - In this short section, you learned the basics about creating a Dockerfile to build a container image. Once you built an image, you started a container and saw the running app.
+
