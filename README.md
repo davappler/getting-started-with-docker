@@ -34,3 +34,9 @@
 ## Conclusion
 - In this short section, you learned the basics about creating a Dockerfile to build a container image. Once you built an image, you started a container and saw the running app.
 
+## Persisting data using Volumes
+- We can persist data, which can then be used in different containers afterwards
+- Create a volume => `docker volume create todo-db`
+- Start a container with that volume => `docker run -dp 3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started`
+- Get information about a volume=> `docker volume inspect todo-db`
+- 
