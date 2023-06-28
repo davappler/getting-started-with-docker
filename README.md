@@ -3,6 +3,10 @@ NOTE : THESE NOTES ARE WRITTEN FROM MY UNDERSTANDING OF DOCKER, OR SOME OF THEM 
 
 # Getting started with docker
 
+- Docker file is like a recipe/set of instructions that is responsible for making a container-image/docker-image
+- docker build command will build the docker-image, based on the instructions given in the DOCKERFILE
+- 
+
 ## What is a container?
 
 - Simply put, a container is a sandboxed process on your machine that is isolated from all other processes on the host machine.
@@ -14,6 +18,27 @@ NOTE : THESE NOTES ARE WRITTEN FROM MY UNDERSTANDING OF DOCKER, OR SOME OF THEM 
 ## What is a container Image?
 
 - When running a container, it uses an isolated filesystem. This custom filesystem is provided by a container image. Since the image contains the container’s filesystem, it must contain everything needed to run an application - all dependencies, configurations, scripts, binaries, etc. The image also contains other configuration for the container, such as environment variables, a default command to run, and other metadata.
+- We can push a docker image to the docker registry => `docker push`
+- We can pull images from the docker registry => `docker pull`
+- Docker registry is a place where all docker images are stored online, anyone can pull images from there.
+
+
+
+## DOCKERFILE content
+
+
+```
+# syntax=docker/dockerfile:1
+   
+FROM node:18-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+CMD ["node", "src/index.js"]
+EXPOSE 3000
+
+
+```
 
 ## Create an Image using `docker build`
 
