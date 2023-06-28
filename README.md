@@ -1,5 +1,10 @@
 NOTE : THESE NOTES ARE WRITTEN FROM MY UNDERSTANDING OF DOCKER, OR SOME OF THEM WILL BE COPY PASTED FROM THE RESOURCES I HAVE USED TO UNDERSTAND DOCKER.
 
+How to study from this repo? I will explain the folder structure now, 
+- `Tips.md`- Contains the information which I think is useful to summarize the topics
+- `DOCKER-COMMANDS.md` - Is the cheatsheet for Docker commands
+- `DOCKER-PLAYGROUND` - Contains the information about https://labs.play-with-docker.com
+- `README.md` - You can follow this file for main content of the course itself.
 
 # Getting started with docker
 
@@ -14,6 +19,7 @@ NOTE : THESE NOTES ARE WRITTEN FROM MY UNDERSTANDING OF DOCKER, OR SOME OF THEM 
 - Can be run on local machines, virtual machines or deployed to the cloud.
 - Is portable (can be run on any OS).
 - Is isolated from other containers and runs its own software, binaries, and configurations.
+- Each container has independent file system
 
 ## What is a container Image?
 
@@ -21,7 +27,7 @@ NOTE : THESE NOTES ARE WRITTEN FROM MY UNDERSTANDING OF DOCKER, OR SOME OF THEM 
 - We can push a docker image to the docker registry => `docker push`
 - We can pull images from the docker registry => `docker pull`
 - Docker registry is a place where all docker images are stored online, anyone can pull images from there.
-
+- One image can have multiple containers
 
 
 ## DOCKERFILE content
