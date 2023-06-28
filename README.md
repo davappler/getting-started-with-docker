@@ -1,16 +1,16 @@
-NOTE : THESE NOTES ARE WRITTEN FROM MY UNDERSTANDING OF DOCKER, OR SOME OF THEM WILL BE COPY PASTED FROM THE RESOURCES I HAVE USED TO UNDERSTAND DOCKER.
+NOTE : THIS COURSE IS NOT WRITTEN BY A DOCKER EXPERT, THESE ARE THE NOTES THAT I TOOK WHILE LEARNING DOCKER MYSELF. I JUST TURNED IT INTO A SHAPE WHERE ANYONE CAN USE THIS SPACE TO LEARN DOCKER. THESE NOTES ARE WRITTEN FROM MY UNDERSTANDING OF DOCKER, OR SOME OF THEM WILL BE COPY PASTED FROM THE RESOURCES I HAVE USED TO UNDERSTAND DOCKER.
 
-How to study from this repo? I will explain the folder structure now, 
-- `Tips.md`- Contains the information which I think is useful to summarize the topics
+## How to study from this repo? I will explain the folder structure now,
+
+- `Tips.md`- Contains the information which I think is useful to summarize FEW topics
 - `DOCKER-COMMANDS.md` - Is the cheatsheet for Docker commands
 - `DOCKER-PLAYGROUND` - Contains the information about https://labs.play-with-docker.com
 - `README.md` - You can follow this file for main content of the course itself.
+- `QUESTIONS.md` - In this file I have written some questions that I had while learning docker.
 
 # Getting started with docker
 
-- Docker file is like a recipe/set of instructions that is responsible for making a container-image/docker-image
-- docker build command will build the docker-image, based on the instructions given in the DOCKERFILE
-- 
+<!-- Add some general information about docker here, what is docker? why use docker? -->
 
 ## What is a container?
 
@@ -29,13 +29,11 @@ How to study from this repo? I will explain the folder structure now,
 - Docker registry is a place where all docker images are stored online, anyone can pull images from there.
 - One image can have multiple containers
 
-
 ## DOCKERFILE content
-
 
 ```
 # syntax=docker/dockerfile:1
-   
+
 FROM node:18-alpine
 WORKDIR /app
 COPY . .
@@ -56,21 +54,23 @@ EXPOSE 3000
 - You might have noticed that Docker downloaded a lot of “layers”. This is because you instructed the builder that you wanted to start from the node:18-alpine image. But, since you didn’t have that on your machine, Docker needed to download the image.
 - After Docker downloaded the image, the instructions from the Dockerfile copied in your application and used yarn to install your application’s dependencies. The CMD directive specifies the default command to run when starting a container from this image.
 
-
 ## Start the app
+
 - Above we created the image using `docker build` command
 - Now we can use that Image to run the app in a container
 - We will use `docker run` command to do so
 - `docker run -dp 3000:3000 getting-started`
-- You use the -d flag to run the new container in “detached” mode (in the background). 
+- You use the -d flag to run the new container in “detached” mode (in the background).
 - You also use the -p flag to create a mapping between the host’s port 3000 to the container’s port 3000. Without the port mapping, you wouldn’t be able to access the application.
 
 ## Conclusion
+
 - In this short section, you learned the basics about creating a Dockerfile to build a container image. Once you built an image, you started a container and saw the running app.
 
 ## Persisting data using Volumes
+
 - We can persist data, which can then be used in different containers afterwards
 - Create a volume => `docker volume create todo-db`
 - Start a container with that volume => `docker run -dp 3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started`
 - Get information about a volume=> `docker volume inspect todo-db`
-- 
+-
