@@ -8,3 +8,5 @@
 - Each container has independent file system
 - use this website to learn docker => https://labs.play-with-docker.com
 - `docker run` command will run the `docker pull` command and pull the image for you if it does not exist already.
+- We can run docker containers locally by using Docker Desktop, on server we can run them by using Docker engine or K8's, 
+- OCI (Open Container Initiative) => It is like standard set of instructions set for containers and images. Wherever the containers are made they have a standard interface through OCI.
