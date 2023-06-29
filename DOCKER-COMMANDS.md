@@ -1,11 +1,9 @@
 # List of Docker commands
 
-- `docker` - Gives the list of available commands 
+- `docker` - Gives the list of available commands
 - `docker version` - If the docker is running locally, it will send the version info
 - `docker info` - Send the information about docker.
 - `docker ps` => This will list all the processes running
-
-
 
 # Commands for containers
 
@@ -22,17 +20,26 @@
 - `docker container top foo` => This will show us the list of process running inside the container called `foo`.
 - `docker container inspect` => Details of one containers config.
 - `docker container stats` => Performance stats for all containers.
-- `docker container run -it --name proxy nginx bash` => This will run the container and start an interactive shell (BASH) inside the container. 
+- `docker container run -it --name proxy nginx bash` => This will run the container and start an interactive shell (BASH) inside the container.
 - `docker container exec` => Does the exact same thing as above (start an interactive shell (BASH) inside the container), it just runs it on running container.
 - `docker container start -ai <name-of-the-container>` => This will start an existing container which is probably stopped but not removed from the list.
-
+- `docker container port <name-of-container>` => will tell us the ports of host and the container.
 
 # Commands for Images
 
 - `docker pull <image-name>` => This will download the image from the registry
 - `docker image ls` => displays the list of images
 
+# Commands for network
+
+- `docker network ls` => List of networks
+- `docker network inspect` => List of networks
+- `docker network create --driver` =>
+- `docker network connect` => 
+- `docker network disconnect` => 
+
 # Extra Commands
+
 - `docker build -t getting-started .` => This is used to build an image named `getting-started` and `.` specifies that look for `Dockerfile` in current directory
 
 - `docker login -u YOUR-USER-NAME` => login using CLI

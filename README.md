@@ -61,7 +61,7 @@ EXPOSE 3000
 - We will use `docker run` command to do so
 - `docker run -dp 3000:3000 getting-started`
 - You use the -d flag to run the new container in “detached” mode (in the background).
-- You also use the -p flag to create a mapping between the host’s port 3000 to the container’s port 3000. Without the port mapping, you wouldn’t be able to access the application.
+- You also use the -p flag to create a mapping between the host’s port 3000 to the container’s port 3000. Without the port mapping, you wouldn’t be able to access the application. It takes the traffic from 3000 (localhost) to the port 3000 of the container.
 
 ## Conclusion
 
@@ -74,3 +74,26 @@ EXPOSE 3000
 - Start a container with that volume => `docker run -dp 3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started`
 - Get information about a volume=> `docker volume inspect todo-db`
 -
+
+
+
+# Networks
+
+- Run `docker network --help` => to see the list of commands available.
+- Run `docker network ls` => Depending on the OS and version of docker we will see either `bridge` or `docker0` network name but they both are same.
+- `Bridge/docker0` => is the default network that bridges through the NAT firewall to the physical network that your host is connected to.
+- You will also see a `host` network in the list, it is a special network that skips the virtual networking of docker and attaches the container directly to the host interface.
+
+- Creating a new network and attaching container to it
+    - `docker network create my_app_net` => We create a new network called `my_app_net`, and by default it will be a `bridge` network which uses the virtual network for containers to talk to host machine.
+    - `docker container run -d --name new_nginx --network my_app_net nginx` => We create a new container from `nginx` image and give it a name of `new_nginx` and with the help of `--network` flag we attach it to the `my_app_net` network we created above.
+    - `docker network inspect my_app_net ` => Then we can inspect the network and check in the containers field to verify that container has been added to the network.
+    - `docker network connect <network-id> <container-id> ` => this will connect that container to the network. 
+    - `docker network disconnect <network-id> <container-id> ` => this will disconnect that container from the network. 
+
+- Tips
+    - Create your apps so frontend/backend sit on the same docker network
+    - Their inter-communication never leaves the host.
+    - All externally exposed ports closed by default
+    - You must manually expose via `-p`, whicih is better default security.
+    - 
