@@ -96,4 +96,49 @@ EXPOSE 3000
     - Their inter-communication never leaves the host.
     - All externally exposed ports closed by default
     - You must manually expose via `-p`, whicih is better default security.
-    - 
+    - Container should not rely on IP's for inter-communication
+    - DNS for friendly names is built-in if you use custom networks
+    - It is recommended to make custom networks (This all gets easier with Docker Compose)
+
+
+
+### Running bash in the different container with different OS's
+
+- `docker container run --rm -it ubuntu:14.04 bash`
+- `docker container run --rm -it centos:7 bash`
+
+
+### DNS Round Robin testing
+- In this we will create multiple containers from a same image and give them a same alias of `search`
+- When the containers have same alias of `search` within a network, this will act as DNS Round Robin method.
+- Whenever we send multiple request to this alias `search`, the requests will be sent to a different container in random order.
+- When same request is handled by different IP addresses, this method is called round robin method, this is a method of load balancing that is used to reduce the load on servers.
+
+
+
+- Steps
+    - Lets create a network first => `docker network create dude`
+    - Let's create a container and attach it to the network we just created:
+        - `docker container run -d --net dude --net-alias search elasticsearch:2`
+        - FOR ARM64 machines => `docker run -e "discovery.type=single-node" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" -e "xpack.security.enabled=false" --network dude -d --network-alias search elasticsearch:8.4.3`
+        - We should run the above command multiple times to create multiple containers with same alias.
+        - `--net dude` This option specifies the network to which the container should be connected.
+        - `--net-alias search` This option assigns an alias to the container on the network. In this case, the alias "search" is assigned to the container. This alias can be used by other containers on the same network to communicate with this container.
+    - Then we run another alpine container in the same network
+        - `docker container run --rm -it --network dude alpine`
+        - Now we are in the bash of alpine because we started interactive version with `-it`
+        - now if we run `nslookup search` in the bash
+        - We get multiple IP addresses linked to "search" alias.
+        - The `nslookup` command is a network administration tool used to query the Domain Name System (DNS) to obtain information about DNS records.
+        - When you run `nslookup search`, it tries to perform a DNS lookup for the hostname "search".
+        - If a matching record is found, `nslookup` displays the IP address of the hostname "search". 
+    - Now in the alpine bash, we can go ahead and send some requests to elasticsearch containers
+        - `apk add curl` - Run this command within the bash
+        - `curl search:9200` - Run this command multiple times and you will see that this request was sent to different `search` containers each time. 
+        - You can verify that by checking the `cluster_uuid` from the response of each request.
+
+
+
+
+
+.
