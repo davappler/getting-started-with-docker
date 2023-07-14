@@ -137,8 +137,3 @@ EXPOSE 3000
         - `curl search:9200` - Run this command multiple times and you will see that this request was sent to different `search` containers each time. 
         - You can verify that by checking the `cluster_uuid` from the response of each request.
 
-
-
-
-
-.

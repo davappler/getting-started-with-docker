@@ -27,8 +27,11 @@
 
 # Commands for Images
 
-- `docker pull <image-name>` => This will download the image from the registry
+- `docker pull <image-name>` => This will download the image from the docker hub registry
 - `docker image ls` => displays the list of images
+- `docker history <name-of-the-image>` => Will tell us the history about it's image layers.
+- `docker image inspect <name-of-the-image>` => will give us the meta data of the image,
+- `docker image build -t myFirstImage .` => This will build an image from the dockerfile found in the present directory (That's what the dot . represents in the command)
 
 # Commands for network
 
