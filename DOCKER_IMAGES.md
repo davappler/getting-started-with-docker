@@ -95,3 +95,22 @@ TIP
 
 - A good practice is to keep in mind the order of layers.
 - Layers that change the most should be bottom most layers and layers that change the least should be top most layers in the Dockerfile
+
+
+
+```
+WOKRDIR /usr/share/nginx/html
+
+COPY index.html index.html
+```
+
+- WORKRDIR : This is used to change the directory, this is the best way to do cd into a directory and not using the run command. (RUN cd somewhere/index.html)
+- COPY : This will copy the content of our local index.html into nginx index.html, this is how copy command is used => `COPY <source> <destination>`
+
+
+### Cleaning Images
+
+- `docker image prune` => Will clean the dangling images
+- `docker system prune` => Will clean up everything you're not currently using
+- `docker image prune -a` => Will remove all images you're not using
+
