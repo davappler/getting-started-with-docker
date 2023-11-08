@@ -54,3 +54,17 @@ This is the responsibility of container orchestration system to make sure that e
 
 - `docker service rm <SERVICE-NAME>` => will remove the service and the containers.
 -
+
+## Running swarm in multiple instances
+
+- We have three instances, we can have them by visiting => `https://labs.play-with-docker.com/`
+- Let's assume we have three nodes=> node1, node2, node3
+-
+- we can start the swarm in node1 => `docker swarm init` or `docker swarm init --advertise-addr <IP-ADDRESS>`
+- Then a join command will be printed in the console, copy paste that in node2 to join the node2 in the swarm
+- If you need the join token at a later time, run this command to get it => `docker swarm join-token manager`
+
+- Then you can make node2 as a manager => `docker node update --role manager node2`
+- Now you can run swarm commands in node2, otherwise you would not be able to.
+- `docker node ls`=> will list the available nodes
+-
