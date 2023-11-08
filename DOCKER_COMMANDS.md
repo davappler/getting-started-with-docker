@@ -41,6 +41,13 @@
 - `docker network connect` => 
 - `docker network disconnect` => 
 
+
+# Commands for volumes
+
+- `docker volume ls` - Will list all of the volumes locally
+- `docker volume create <name-of-the-volume>` - Will create the volume
+
+
 # Extra Commands
 
 - `docker build -t getting-started .` => This is used to build an image named `getting-started` and `.` specifies that look for `Dockerfile` in current directory
@@ -52,3 +59,5 @@
 - `docker volume create todo-db` => For creating a volume with name `todo-db`
 - `docker run -dp 3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started` => This is used to run a container associated with a volume
 - `docker volume inspect todo-db` => This provides information for a volume.
+
+
