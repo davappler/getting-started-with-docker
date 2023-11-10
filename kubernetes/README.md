@@ -56,4 +56,32 @@
 ## Kubectl or KubeControl
 
 - It is a CLI tool
--
+
+## Minikube
+
+- We can create cluster locally using minikube, with this we do not need to use any paid cloud provider like AWS or GCP or AZURE. Minikube runs a single-node Kubernetes cluster on your machine so that you can try out Kubernetes for your daily development work.
+- Minikube is a tool that is primarily used to create a single-node Kubernetes cluster locally on your computer. It sets up a virtual machine (VM) running a single node, and within that node, it deploys a Kubernetes cluster for development and testing purposes.
+- In a typical Minikube setup, the single node created by Minikube serves as both the master node and the worker node. This means that the node takes on the roles of both managing the Kubernetes control plane (master node responsibilities) and running container workloads (worker node responsibilities). It's a combined master/worker node for the sake of simplicity in a local development and testing environment.
+
+## Running clusters with minikube and managing with kubectl
+
+- minikube creates single node cluster.
+- `minikube start --driver=docker` => starting minikube
+- `minikube ssh` => When you run `minikube ssh`, it connects to the Minikube VM, giving you direct access to the VM's command line. This can be useful for debugging, inspecting the VM, and performing various tasks that require shell access to the Minikube node.
+- `kubectl` => type this command to see a list of available commands for `kubectl`
+- `kubectl cluster-info` => Will display the information of the cluster
+- `kubectl get nodes` => will give the list of nodes
+- `kubectl get namespaces` => namespaces are used here to group the different resources and configuration object.
+- `kubectl get pods --namespace=kube-system` => will list the pods from that namespace
+- `kubectl run nginx --image=nginx` => is creating a new deployment named "nginx" using the official Nginx container image.
+- `kubectl describe pod nginx`
+
+```
+@getting-started-with-docker % minikube ssh
+docker@minikube:~$ docker ps | grep nginx
+7323e7111a36   nginx                       "/docker-entrypoint.…"   7 minutes ago    Up 7 minutes              k8s_nginx_nginx_default_702275c4-4070-4435-ad72-b1962f3f1ac7_0
+616c5d912f24   registry.k8s.io/pause:3.9   "/pause"                 7 minutes ago    Up 7 minutes              k8s_POD_nginx_default_702275c4-4070-4435-ad72-b1962f3f1ac7_0
+```
+
+- You can see the pause container above, it is used to keep the namespace because the container itself can be removed, restarted or deleted, in order to preserve the namespace, we have the pause container
+- `kubectl delete pod nginx` => will delete the pod.
