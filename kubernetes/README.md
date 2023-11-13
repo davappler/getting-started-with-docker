@@ -106,8 +106,9 @@ Selector:               app=nginx-deployment
 Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
 ```
 
-- Selector is used to bind the deployment with a pod, here we see above that selector is `app=nginx-deployment` and the pod is it linked to will have the same label value of `app=nginx-deployment`.
-- So deployment's selector and pod's label will have the same value, when they re linked to each other.
+- Selector is used to bind the deployment with a pod, here we see above that selector is `app=nginx-deployment` and the pod is it linked to will have the same `label` of value `app=nginx-deployment`.
+- So deployment's `selector` and pod's `label` will have the same value, when they re linked to each other.
 
 - `kubectl scale deployment nginx-deployment --replicas=5` => this will increase the number of pods running in the deployment
 - `kubectl expose deployment nginx-deployment --port=8080 --target-port=80` => we are exposing the port 8080 for the deployment
+- `kubectl delete deployment nginx-deployment` => Will delete the deployment
