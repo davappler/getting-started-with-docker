@@ -22,7 +22,7 @@
 - The LoadBalancer resource will assign an external IP address to the node-js-server deployment and forward traffic from the external IP address to the Pods of the node-js-server deployment.
 - To access the Node.js server from outside of the Kubernetes cluster, you can use the external IP address of the LoadBalancer resource and port 3000.
 
-## Connecting to the service from outside world
+## Connecting to the service from outside world (Exposing a deployment)
 
 - `kubectl get services` or `kubectl get svc` => will give the list of services
 - We can take the CLUSTER-IP from the above commands print results.
@@ -33,4 +33,29 @@
   docker@minikube:~$ curl 10.101.40.196:3000
   Hello world from the node-js-server-fccdd7d97-k9bzqdocker@minikube:~$
   ```
-- 
+-
+
+```
+Note: We make a deployment, then expose it via service to the outside world.
+```
+
+- We can connect to the service via the single node minikube created
+- `k expose deployment node-js-server --type=NodePort --port=3000`
+- After creating a service from the deployment called `node-js-server`
+- We can run `minikube service node-js-server` to connect to the pod.
+
+### Creating a loadBalancer service from a deployment
+
+- `kubectl expose deployment node-js-server --type=LoadBalancer --port=3000`
+- `kubectl get svc`
+
+```
+dsingh@Davinders-MacBook-Pro-2 node-js-server % k get svc
+NAME             TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE
+kubernetes       ClusterIP      10.96.0.1     <none>        443/TCP          14d
+node-js-server   LoadBalancer   10.111.76.0   <pending>     3000:31243/TCP   13s
+```
+
+- We see that the External IP is pending, it will remain pending in locally generated minikube.
+- When we deploy out app in cloud AWS or GCP, then we will the IP address assigned automatically
+-
