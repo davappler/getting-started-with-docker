@@ -2,7 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: node-web-js-server
+
 spec:
+  replicas: 5
   selector:
     matchLabels:
       app: node-web-js-server

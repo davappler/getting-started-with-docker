@@ -96,3 +96,12 @@ Note: We can go back to older version by running:
 
 - We can run the deployment with this command (In the same directory where deployment.yaml exists or mention the path of the file )
   - `kubectl apply -f deployment.yaml`
+- Similary we can run the service:
+  - `kubectl apply -f service.yaml`
+- Then we can connect to the service with minikube
+  - `minikube service node-web-js-server`
+- We can delete both deployment and service
+
+  - `kubectl delete -f deployment.yaml -f service.yaml`
+
+- Let's create multiple deployment and connect them to each other, which is a general use-case like connecting Frontend to Backend or Backend to Database service.
