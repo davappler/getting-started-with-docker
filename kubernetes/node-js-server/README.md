@@ -90,4 +90,9 @@ Note: We can go back to older version by running:
 - In declarative approach we have to create YAML configuration files with all the details for the deployment and services we want to run.
 - Then we will use kubectl `apply` command to run the configurations we define in the YAML files.
 
+- Documentation for the configuration of Deployment.yaml files can be found here
 
+  - https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/
+
+- We can run the deployment with this command (In the same directory where deployment.yaml exists or mention the path of the file )
+  - `kubectl apply -f deployment.yaml`

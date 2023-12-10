@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-web-js-server
+spec:
+  selector:
+    matchLabels:
+      app: node-web-js-server
+  template:
+    metadata:
+      labels:
+        app: node-web-js-server
+    spec:
+      containers:
+      - name: node-web-js-server
+        image: davapplerr/node-js-server
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 3000
