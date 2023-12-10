@@ -58,4 +58,36 @@ node-js-server   LoadBalancer   10.111.76.0   <pending>     3000:31243/TCP   13s
 
 - We see that the External IP is pending, it will remain pending in locally generated minikube.
 - When we deploy out app in cloud AWS or GCP, then we will the IP address assigned automatically
--
+
+### Next step is to deploy a changed image (Rolling updates to the deployed app)
+
+- We will go ahead and change `index.mjs` file
+- `docker build . -t davapplerr/node-js-server:2.0.0` => Build the docker image again with a tag of 2.0.0
+- `docker login` => Login if logged out in terminal
+- `docker push davapplerr/node-js-server:2.0.0` => Push the latest image with a tag pof 2.0.0
+
+```
+Note: After pushing the changes, you will see two versions of the same image in your docker hub account.
+```
+
+Now we will update the deployment with this new image and see how k8s handles this change.
+
+- `kubectl set image deployment node-js-server node-js-server=davapplerr/node-js-server:2.0.0`
+  be ready to enter this command as soon as you enter the above
+- `kubectl rollout status deploy node-js-server`
+
+Note: We can go back to older version by running:
+
+- `kubectl set image deployment node-js-server node-js-server=davapplerr/node-js-serve`, which will take it back to the older version.
+
+## Minikube Dashboard
+
+- `minikube dashboard` => Will open the dashboard.
+
+## Declarative approach for creating deployments and services
+
+- We have so far used imperative approach to create deployments and services, but in reality we use declarative approach to do that.
+- In declarative approach we have to create YAML configuration files with all the details for the deployment and services we want to run.
+- Then we will use kubectl `apply` command to run the configurations we define in the YAML files.
+
+
