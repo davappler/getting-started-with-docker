@@ -105,3 +105,25 @@ Note: We can go back to older version by running:
   - `kubectl delete -f deployment.yaml -f service.yaml`
 
 - Let's create multiple deployment and connect them to each other, which is a general use-case like connecting Frontend to Backend or Backend to Database service.
+
+## Folder node-js-server-and-nginx
+
+- We have two deployments
+  - Web
+  - Nginx
+- These two deployments are located in the K8s cluster
+- The service of the `Web` deployment will be of type `LoadBalancer`
+- We will be creating two yaml files ( `node-and-nginx.yaml` and `nginx.yaml` ) for deployments and services.
+- `node-and-nginx.yaml` will setup our first app node js server that will talk to nginx in the index.mjs file.
+- `nginx.yaml` will setup and run our second app, so that it can be reached from the first app.
+- after creating the yaml files we can run them like this:
+  - `kubectl apply -f node-and-nginx.yaml -f nginx.yaml`
+- We can now list the pods and now we can take any pods and run any commands inside of the containers that are in the pods.
+- `kubectl get pods` => found this name from the list => `node-js-server-and-nginx-6f88dc74c6-dpdsh`
+- `kubectl exec node-js-server-and-nginx-6f88dc74c6-dpdsh -- nslookup nginx` => This means we tried to resolve nginx name from inside of the container that belongs to this pod `node-js-server-and-nginx-6f88dc74c6-dpdsh`.
+- So, when you run this command, it will execute nslookup nginx inside the container running in the specified pod (node-js-server-and-nginx-6f88dc74c6-dpdsh).
+
+- We can now check the status of minikub => `minikube status`
+- Then we can stop it => `minikube stop`
+- Cleaning everything => `minikube delete`
+- If you want to start again => `minikube start --driver=docker`
