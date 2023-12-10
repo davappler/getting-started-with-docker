@@ -1,8 +1,17 @@
 # Kubernetes
 
+
+```
+Terminologies List
+- Pods (Smallest unit in kubernetes)
+- Kubernetes Clusters
+- Nodes (Servers, master and worker nodes)
+- Services (Run inside nodes)
+```
+
 - Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications
 - It is a container orchestrator(Organizer)
-- Makes many serves acts like one
+- Makes many servers acts like one
 - Released by google but now maintained by open source community
 - K8S takes care of automatic deployment of the containerized applications across different servers.
 - Distribution of the load across multiple servers
@@ -112,3 +121,5 @@ Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavai
 - `kubectl scale deployment nginx-deployment --replicas=5` => this will increase the number of pods running in the deployment
 - `kubectl expose deployment nginx-deployment --port=8080 --target-port=80` => we are exposing the port 8080 for the deployment
 - `kubectl delete deployment nginx-deployment` => Will delete the deployment
+
+- `kubectl delete all --all` => Will delete all the resources we have created/using.
