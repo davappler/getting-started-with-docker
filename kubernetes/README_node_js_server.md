@@ -108,6 +108,11 @@ Note: We can go back to older version by running:
 
 ## Folder node-js-server-and-nginx
 
+
+
+![alt text](../images/two-services.png)
+
+
 - We have two deployments
   - Web
   - Nginx
