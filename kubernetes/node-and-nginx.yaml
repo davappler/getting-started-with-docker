@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-js-server-and-nginx
+spec:
+  type: LoadBalancer
+  selector:
+    app: node-js-server-and-nginx
+  ports:
+  - port: 3333
+    targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-js-server-and-nginx
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-js-server-and-nginx
+  template:
+    metadata:
+      labels:
+        app: node-js-server-and-nginx
+    spec:
+      containers:
+      - name: node-js-server-and-nginx
+        image: davapplerr/node-js-server-and-nginx
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 3000

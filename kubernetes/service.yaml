@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-web-js-server
+spec:
+  type: LoadBalancer
+  selector:
+    app: node-web-js-server
+  ports:
+  - port: 3030
+    targetPort: 3000
